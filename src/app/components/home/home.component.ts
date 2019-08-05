@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CandidatosService, Votante} from '../../services/votaciones.service';
+import * as alertify from 'alertifyjs';
 
 @Component({
   selector: 'app-home',
@@ -26,21 +27,24 @@ export class HomeComponent implements OnInit {
   }
 
   generarRegistroVotante(id:any){
-
+    let habilitarVotacion:boolean;
     let registro={ id: id
                  ,swVoto: false}
 
-    this.listaVotantes = this._candidatoService.generarRegistroVotante(registro);
+    habilitarVotacion = this._candidatoService.generarRegistroVotante(registro);
 
-    let votoActual =  this.listaVotantes.find(registro => registro.id === id)
-
-    if(!votoActual.swVoto){
-      console.log("Puede votars")
-    }else{
-      console.log("ya el usuario realizo el voto")
-      return;
-
+    if(!habilitarVotacion){
+      alertify
+      .alert("El usuario con número de identificación: <b>" + id + "</b> ya registro el voto!", ()=>{
+        alertify.message('OK');
+        document.getElementById("id").value = "";
+      });
     }
+
+
+
+
+
 
 
 

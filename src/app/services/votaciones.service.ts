@@ -1,4 +1,5 @@
 import { Injectable} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class CandidatosService{
@@ -58,16 +59,21 @@ private candidatos:Candidato[]=
 
 private listaVotantes:Votante[]=[];
 
-  constructor(){
+private habilitarVotacion: boolean;
+
+votanteActual: any;
+
+  constructor( private router : Router ){
     console.log("Servicio listo para usar!!")
     this.candidatos.forEach((item)=>{
       if(!item.cantidadVotos){
         item.cantidadVotos = 0;
       }
     })
+    this.habilitarVotacion = false;
   }
 
-  getCandidatos():Candidato[] {
+  getCandidatos():Candidato[]  {
     return this.candidatos;
   }
 
@@ -81,10 +87,19 @@ private listaVotantes:Votante[]=[];
         item.cantidadVotos++;
       }
     })
+
+    this.listaVotantes.forEach((item)=>{
+      if(item.id == this.votanteActual.id){
+        item.swVoto = true;
+      }
+    })
+
+    this.router.navigate(['/home'])
+
     return this.candidatos;
   }
 
-  generarRegistroVotante(votante:Votante):Votante[]{
+  generarRegistroVotante(votante:Votante):boolean{
     let id = votante.id;
     let voto =  this.listaVotantes.find(registro => registro.id === id)
     console.log("service " + votante)
@@ -93,11 +108,25 @@ private listaVotantes:Votante[]=[];
       this.listaVotantes.push(votante);
     }
 
-    console.log("voto" + voto)
+    let votoActual =  this.listaVotantes.find(registro => registro.id === id)
 
-    return this.listaVotantes;
+    if(!votoActual.swVoto){
+     this.habilitarVotacion = true;
+     this.votanteActual = (votoActual)
+     this.router.navigate(['/tarjeton'])
+
+    }else{
+      this.habilitarVotacion = false;
+    }
+
+    return this.habilitarVotacion;
 
   }
+
+  getEstadoVotacion():boolean{
+    return this.habilitarVotacion;
+  }
+
 
   // getCandidato( idx:number){
   //   return this.candidatos[idx]
@@ -136,3 +165,4 @@ export interface Votante{
   id:number;
   swVoto:boolean;
 }
+

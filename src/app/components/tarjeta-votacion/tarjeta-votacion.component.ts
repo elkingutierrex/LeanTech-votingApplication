@@ -15,11 +15,18 @@ export class TarjetaVotacionComponent implements OnInit {
   date:number;
   arrayConteoVotos:any[]=[];
 
+  habilitarVotacion : boolean;
+
   constructor( private _candidatosService :CandidatosService,
                private router:Router) {
     this.title = "Votaciones";
-    this.subtitle = "Alcaldia";
+    this.subtitle = "Alcaldia Medellín";
     this.date = new Date().getFullYear();
+    this.habilitarVotacion = _candidatosService.getEstadoVotacion();
+
+    if(!this.habilitarVotacion){
+      this.router.navigate(['/home'])
+    }
 
   }
 
@@ -27,7 +34,7 @@ export class TarjetaVotacionComponent implements OnInit {
     this.candidatos = this._candidatosService.getCandidatos();
   }
 
-  generarVoto(candidato:any){
+  generarVoto(candidato:any, ){
 
     alertify.confirm("Esta seguro de que su voto sera por:  <b>" + candidato.nombre + " ?</b>" ,()=>{
     alertify.success('Voto registrado');
