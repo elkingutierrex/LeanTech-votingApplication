@@ -56,6 +56,8 @@ private candidatos:Candidato[]=
   }
 ];
 
+private listaVotantes:Votante[]=[];
+
   constructor(){
     console.log("Servicio listo para usar!!")
     this.candidatos.forEach((item)=>{
@@ -67,6 +69,34 @@ private candidatos:Candidato[]=
 
   getCandidatos():Candidato[] {
     return this.candidatos;
+  }
+
+  getListaVotantes():Votante[]{
+    return this.listaVotantes;
+  }
+
+  generarVoto(candidato:Candidato):Candidato[]{
+    this.candidatos.forEach(item=>{
+      if( item.id=== candidato.id ){
+        item.cantidadVotos++;
+      }
+    })
+    return this.candidatos;
+  }
+
+  generarRegistroVotante(votante:Votante):Votante[]{
+    let id = votante.id;
+    let voto =  this.listaVotantes.find(registro => registro.id === id)
+    console.log("service " + votante)
+
+    if(!voto){
+      this.listaVotantes.push(votante);
+    }
+
+    console.log("voto" + voto)
+
+    return this.listaVotantes;
+
   }
 
   // getCandidato( idx:number){
@@ -100,5 +130,9 @@ export interface Candidato{
   aparicion:string;
   partidoPolitico:string;
   cantidadVotos?:number;
+}
 
+export interface Votante{
+  id:number;
+  swVoto:boolean;
 }

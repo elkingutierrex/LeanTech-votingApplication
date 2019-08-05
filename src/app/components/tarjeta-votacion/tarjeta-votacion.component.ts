@@ -30,15 +30,11 @@ export class TarjetaVotacionComponent implements OnInit {
   generarVoto(candidato:any){
 
     alertify.confirm("Esta seguro de que su voto sera por:  <b>" + candidato.nombre + " ?</b>" ,()=>{
-    alertify.success('Ok');
-    this.candidatos.forEach(item=>{
-      if( item.id=== candidato.id ){
-        item.cantidadVotos++;
-      }
-    })
+    alertify.success('Voto registrado');
+    this.candidatos = this._candidatosService.generarVoto(candidato);
   },
   function(){
-    alertify.error('Cancel');
+    alertify.error('Cancelado');
   });
 
 
