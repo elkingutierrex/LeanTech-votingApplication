@@ -40,13 +40,17 @@ export class HomeComponent implements OnInit {
         document.getElementById("id").value = "";
       });
     }
+  }
 
-
-
-
-
-
-
+  cerrarVotacion(password:number){
+    let swVotacionesActivas : boolean;
+    if(password == 12345){
+      swVotacionesActivas = this._candidatoService.cerrarVotacion();
+    }else{
+      alertify.alert("La contraseña No es valida.",()=>{
+        alertify.message('OK');
+      });
+    }
 
   }
 

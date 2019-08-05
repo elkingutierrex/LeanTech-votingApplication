@@ -62,8 +62,10 @@ private listaVotantes:Votante[]=[];
 private habilitarVotacion: boolean;
 
 votanteActual: any;
+swVotacionesActivas:boolean;
 
   constructor( private router : Router ){
+    this.swVotacionesActivas = true;
     console.log("Servicio listo para usar!!")
     this.candidatos.forEach((item)=>{
       if(!item.cantidadVotos){
@@ -125,6 +127,13 @@ votanteActual: any;
 
   getEstadoVotacion():boolean{
     return this.habilitarVotacion;
+  }
+
+  cerrarVotacion():boolean{
+    this.swVotacionesActivas = false;
+    this.router.navigate(['/panel-de-control'])
+    return this.swVotacionesActivas;
+
   }
 
 
