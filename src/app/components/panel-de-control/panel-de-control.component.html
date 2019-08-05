@@ -1,1 +1,18 @@
-<p>panel-de-control works!</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col"> </th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Partido Politico</th>
+            <th scope="col">cantidadVotos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let candidato of candidatos">
+            <td><img [src]="candidato.img" alt="{{ candidato.nombre }}" class="img-table"></td>
+            <td>{{ candidato.nombre }}</td>
+            <td>{{ candidato.partidoPolitico }}</td>
+            <td>{{ candidato.cantidadVotos }}</td>
+        </tr>
+    </tbody>
+</table>

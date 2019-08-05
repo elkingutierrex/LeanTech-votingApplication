@@ -39,3 +39,7 @@ body {
 .fadeIn {
     animation-name: fadeIn;
 }
+
+.img-table {
+    height: 40px;
+}
