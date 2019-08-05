@@ -43,3 +43,11 @@ body {
 .img-table {
     height: 40px;
 }
+
+.card-candidato {
+    border: 1px;
+    display: inline-block;
+    width: auto;
+    margin: auto;
+    text-align: left;
+}

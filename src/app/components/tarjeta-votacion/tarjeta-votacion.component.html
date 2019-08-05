@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div class="column col-md-3" *ngFor="let candidato of candidatos">
+<div class="column col-md-3 card-candidato" *ngFor="let candidato of candidatos">
     <div class="card animated fadeIn fast">
         <h4 class="card-title" style="text-align: center">{{ candidato.nombre | uppercase }}</h4>
         <img class="card-img-top img-fluid" [src]="candidato.img" [alt]="candidato.nombre">

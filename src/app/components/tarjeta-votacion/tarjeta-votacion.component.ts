@@ -13,7 +13,7 @@ export class TarjetaVotacionComponent implements OnInit {
   title: string;
   subtitle: string;
   date:number;
-  arrayConteoVotos:any[]=[];
+
 
   habilitarVotacion : boolean;
 
